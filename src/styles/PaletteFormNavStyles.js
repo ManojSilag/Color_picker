@@ -1,9 +1,13 @@
-import { DRWAER_WIDTH } from "../constant.js";
-const drawerWidth = DRWAER_WIDTH;
+import { DRWAER_WIDTH } from "../constant";
+import sizes from "./sizes";
 
-const styles = (theme) => ({
+const drawerWidth = DRWAER_WIDTH;
+const styles = theme => ({
   root: {
     display: "flex"
+  },
+  hide: {
+    display: "none"
   },
   appBar: {
     transition: theme.transitions.create(["margin", "width"], {
@@ -31,14 +35,17 @@ const styles = (theme) => ({
     marginRight: "1rem",
     "& a": {
       textDecoration: "none"
+    },
+    [sizes.down("xs")]: {
+      marginRight: "0.5rem"
     }
   },
   button: {
-    margin: "0 0.5rem"
-  },
-
-  hide: {
-    display: "none"
+    margin: "0 0.5rem",
+    [sizes.down("xs")]: {
+      margin: "0 0.2rem",
+      padding: "0.3rem"
+    }
   }
 });
 
