@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import MiniPalette from "./MiniPalette";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles/PalletListstyles";
@@ -15,22 +16,30 @@ class PaletList extends Component {
     this.props.history.push(`/palette/${id}`);
   }
   render() {
-    const { palettes, classes, deletePalette  } = this.props;
-    console.log('dev: PaletList -> render -> palettes', palettes)
+    const { palettes, classes, deletePalette } = this.props;
+    console.log("dev: PaletList -> render -> palettes", palettes);
     return (
       <div className={classes.root}>
         <div className={classes.container}>
           <nav className={classes.nav}>
-            <h1>React colors</h1>
+            <h1 className={classes.heading}>React Colors</h1>
             <Link to="/palette/new">create palette</Link>
           </nav>
-          <div className={classes.palettes}>
-            {palettes.map((p) => {
-              return <MiniPalette {...p} handleClick={this.goToPallete}  handleDelete={deletePalette}
-              key={p.id}
-              id={p.id}/>;
+          <TransitionGroup className={classes.palettes}>
+            {palettes.map((palette) => {
+              return (
+                <CSSTransition key={palette.id} classNames="fade" timeout={500}>
+                  <MiniPalette
+                    {...palette}
+                    handleClick={() => this.goToPallete(palette.id)}
+                    handleDelete={deletePalette}
+                    key={palette.id}
+                    id={palette.id}
+                  />
+                </CSSTransition>
+              );
             })}
-          </div>
+          </TransitionGroup>
         </div>
       </div>
     );
