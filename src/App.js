@@ -82,19 +82,7 @@ class App extends React.Component {
                     </Page>
                   )}
                 />
-                <Route
-                  exact
-                  path="/"
-                  render={(routeProps) => (
-                    <Page>
-                      <PaletList
-                        palettes={this.state.palettes}
-                        deletePalette={this.deletePalette}
-                        {...routeProps}
-                      />
-                    </Page>
-                  )}
-                />
+
                 <Route
                   exact
                   path="/palette/:id"
@@ -104,6 +92,18 @@ class App extends React.Component {
                         palette={generatePalette(
                           this.findPalette(routeProps.match.params.id)
                         )}
+                      />
+                    </Page>
+                  )}
+                />
+
+                <Route
+                  render={(routeProps) => (
+                    <Page>
+                      <PaletList
+                        palettes={this.state.palettes}
+                        deletePalette={this.deletePalette}
+                        {...routeProps}
                       />
                     </Page>
                   )}
